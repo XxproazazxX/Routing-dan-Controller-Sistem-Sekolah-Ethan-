@@ -21,9 +21,16 @@ class StudentController extends Controller
                 'id' => 2,
                 'nis' => '1002',
                 'name' => 'Budi',
-                'class' => 'XII AKL 1',
-                'major' => 'AKL'
-            ]
+                'class' => 'XII RPL 1',
+                'major' => 'RPL'
+            ],
+            [
+                'id' => 3,
+                'nis' => '1003',
+                'name' => 'Nina',
+                'class' => 'XI TKJ 3',
+                'major' => 'TKJ'
+            ],
         ];
         return view('students.index', [
             'title' => $title,
