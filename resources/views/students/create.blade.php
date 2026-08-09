@@ -4,6 +4,9 @@
 
 
 @section('content')
+<x-alert type="error">
+    Terdapat kesalahan pada input data. Silakan periksa kembali dan coba lagi.
+</x-alert>
     <div class="mb-8 border-b border-[#E5E3DB] pb-5">
             <a href="" class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">&larr; Buku
                 Induk</a>
@@ -11,7 +14,8 @@
             <p class="mt-1 text-sm text-slate-500">Isi data untuk mendaftarkan siswa ke buku induk.</p>
         </div>
 
-        <form action="" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+        <form action="{{ route('students.store') }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+          
 
             <div>
                 <label for="nis"

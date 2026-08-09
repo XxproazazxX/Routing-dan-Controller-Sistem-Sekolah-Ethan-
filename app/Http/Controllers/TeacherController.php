@@ -6,38 +6,62 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    // Data dummy guru sesuai ketentuan tugas
+    private $teachers = [
+        [
+            'id' => 1,
+            'nip' => '198501012024',
+            'name' => 'Budi Santoso',
+            'gender' => 'Laki-Laki',
+            'subject' => 'Akuntansi Dasar',
+            'phone' => '081234560001',
+            'status' => 'Aktif',
+        ],
+        [
+            'id' => 2,
+            'nip' => '198703152024',
+            'name' => 'Siti Aminah',
+            'gender' => 'Perempuan',
+            'subject' => 'Jaringan Komputer',
+            'phone' => '081234560002',
+            'status' => 'Aktif',
+        ]
+    ];
+
     public function index()
     {
-        return "Menampilkan halaman daftar guru";
+        return view('teachers.index', [
+            'title' => 'Sistem Sekolah - Daftar Guru',
+            'teachers' => $this->teachers
+        ]);
     }
 
     public function create()
     {
-        return "Menampilkan halaman tambah guru";
-    }
-
-    public function store(Request $request)
-    {
-        return "Melakukan penambahan data guru";
+        return view('teachers.create', [
+            'title' => 'Sistem Sekolah - Tambah Guru'
+        ]);
     }
 
     public function show($id)
     {
-        return "menampilkan detail guru dengan ID: {$id}";
+        // Mencari guru berdasarkan ID
+        $teacher = collect($this->teachers)->firstWhere('id', $id);
+
+        return view('teachers.show', [
+            'title' => 'Sistem Sekolah - Detail Guru',
+            'teacher' => $teacher
+        ]);
     }
 
     public function edit($id)
     {
-        return "Menampilkan halaman edit guru";
-    }
+        // Mencari guru berdasarkan ID untuk di-edit
+        $teacher = collect($this->teachers)->firstWhere('id', $id);
 
-    public function update(Request $request, $id)
-    {
-        return "Melakukan perubahan data guru";
-    }
-
-    public function destroy($id)
-    {
-        return "Menghapus data guru";
+        return view('teachers.edit', [
+            'title' => 'Sistem Sekolah - Edit Guru',
+            'teacher' => $teacher
+        ]);
     }
 }

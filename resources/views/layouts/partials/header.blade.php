@@ -7,10 +7,11 @@
                 </span>
             </a>
             <nav class="hidden gap-8 text-sm md:flex">
-                <a href="#" class="text-white/55 hover:text-white">Siswa</a>
-                <a href="#" class="text-white/55 hover:text-white">Guru</a>
-                <a href="#" class="text-white/55 hover:text-white">Kelas</a>
-                <a href="#" class="text-white/55 hover:text-white">Jurusan</a>
+             <!-- Contoh pada file header.blade.php -->
+            <a href="{{ route('students.index') }}" class="...">Siswa</a>
+            <a href="{{ route('teachers.index') }}" class="...">Guru</a>
+            <a href="{{ route('classes.index') }}" class="...">Kelas</a>
+            <a href="{{ route('majors.index') }}" class="...">Jurusan</a>
             </nav>
         </div>
         <div class="h-0.5 bg-[#A16207]"></div>
