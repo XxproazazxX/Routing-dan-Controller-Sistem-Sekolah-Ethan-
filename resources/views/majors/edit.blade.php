@@ -3,29 +3,65 @@
 @section('title', $title)
 
 @section('content')
-<div class="container mx-auto px-4 py-6 max-w-2xl">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Jurusan</h1>
+    {{-- Menampilkan Alert jika terdapat kesalahan validasi --}}
+    @if ($errors->any())
+        <x-alert type="WARNING">
+            Terdapat kesalahan ketika memperbarui data jurusan ke dalam sistem sekolah
+        </x-alert>
+    @endif
 
-    <form action="{{ route('majors.index') }}" method="GET" class="bg-white p-6 rounded-lg shadow space-y-4">
+    <div class="mb-8 border-b border-[#E5E3DB] pb-5">
+        {{-- Link kembali ke daftar jurusan --}}
+        <a href="{{ route('majors.index') }}" class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">&larr; Buku
+            Induk</a>
+        <h1 class="font-display mt-2 text-3xl font-semibold text-[#16213A]">Ubah Data Jurusan</h1>
+        <p class="mt-1 text-sm text-slate-500">Memperbarui catatan Jurusan <span
+                class="font-medium text-[#16213A]">{{ $major['code'] ?? $major->code ?? 'Jurusan' }}</span>.</p>
+    </div>
+
+    <form action="{{ route('majors.update', $major['id'] ?? $major->id ?? 1) }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+        @csrf
+        @method('PUT')
+
+        {{-- KODE JURUSAN --}}
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Kode Jurusan</label>
-            <input type="text" name="code" value="{{ $major['code'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <label for="code"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Kode Jurusan</label>
+            <input type="text" id="code" name="code" value="{{ old('code', $major['code'] ?? $major->code ?? '') }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none @error('code') border-red-500 @enderror">
+            @error('code')
+                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
+        {{-- NAMA JURUSAN --}}
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Jurusan</label>
-            <input type="text" name="name" value="{{ $major['name'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <label for="name"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Nama Jurusan</label>
+            <input type="text" id="name" name="name" value="{{ old('name', $major['name'] ?? $major->name ?? '') }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none @error('name') border-red-500 @enderror">
+            @error('name')
+                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
+        {{-- DESKRIPSI --}}
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
-            <textarea name="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500">{{ $major['description'] }}</textarea>
+            <label for="description"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Deskripsi</label>
+            <textarea id="description" name="description" rows="3"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none @error('description') border-red-500 @enderror">{{ old('description', $major['description'] ?? $major->description ?? '') }}</textarea>
+            @error('description')
+                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
-        <div class="flex justify-end space-x-3 pt-4 border-t">
-            <a href="{{ route('majors.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300">Batal</a>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">Update</button>
+        {{-- TOMBOL AKSI --}}
+        <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
+            <a href="{{ route('majors.index') }}" class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">Batal</a>
+            <button type="submit"
+                class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">Perbarui
+                Catatan</button>
         </div>
     </form>
-</div>
 @endsection

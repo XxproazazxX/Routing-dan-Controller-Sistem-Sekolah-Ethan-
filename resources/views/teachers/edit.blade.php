@@ -3,50 +3,75 @@
 @section('title', $title)
 
 @section('content')
-<div class="container mx-auto px-4 py-6 max-w-2xl">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Data Guru</h1>
+    <div class="mb-8 border-b border-[#E5E3DB] pb-5">
+        <a href="{{ route('teachers.index') }}" class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">&larr; Buku
+            Induk</a>
+        <h1 class="font-display mt-2 text-3xl font-semibold text-[#16213A]">Ubah Data Guru</h1>
+        <p class="mt-1 text-sm text-slate-500">Memperbarui catatan atas nama <span
+                class="font-medium text-[#16213A]">{{ $teacher['name'] ?? 'Guru' }}</span>.</p>
+    </div>
 
-    <form action="{{ route('teachers.index') }}" method="GET" class="bg-white p-6 rounded-lg shadow space-y-4">
+    <form action="{{ route('teachers.update', $teacher['id'] ?? 1) }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+        @csrf
+        @method('PUT')
+
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">NIP</label>
-            <input type="text" name="nip" value="{{ $teacher['nip'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <label for="nip"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">NIP</label>
+            <input type="text" id="nip" name="nip" value="{{ old('nip', $teacher['nip'] ?? '') }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-            <input type="text" name="name" value="{{ $teacher['name'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <label for="name"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Nama
+                Lengkap</label>
+            <input type="text" id="name" name="name" value="{{ old('name', $teacher['name'] ?? '') }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
-            <select name="gender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500">
-                <option value="Laki-laki" {{ $teacher['gender'] == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="Perempuan" {{ $teacher['gender'] == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+            <label for="gender"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Jenis
+                Kelamin</label>
+            <select id="gender" name="gender"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+                @php $g = old('gender', $teacher['gender'] ?? 'Laki-laki'); @endphp
+                <option value="Laki-laki" {{ ($g == 'Laki-laki' || $g == 'L') ? 'selected' : '' }}>Laki-laki</option>
+                <option value="Perempuan" {{ ($g == 'Perempuan' || $g == 'P') ? 'selected' : '' }}>Perempuan</option>
             </select>
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Mata Pelajaran</label>
-            <input type="text" name="subject" value="{{ $teacher['subject'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500" required>
+            <label for="subject"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Mata Pelajaran</label>
+            <input type="text" id="subject" name="subject" value="{{ old('subject', $teacher['subject'] ?? '') }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">No. Telepon</label>
-            <input type="text" name="phone_number" value="{{ $teacher['phone'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500">
+            <label for="phone_number"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">No. Telepon</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number', $teacher['phone_number'] ?? $teacher['phone'] ?? '') }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-blue-500 focus:border-blue-500">
-                <option value="Aktif" {{ $teacher['status'] == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                <option value="Tidak Aktif" {{ $teacher['status'] == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+            <label for="status"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Status</label>
+            <select id="status" name="status"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+                @php $s = old('status', $teacher['status'] ?? 'Aktif'); @endphp
+                <option value="Aktif" {{ ($s == 'Aktif' || $s == 'A') ? 'selected' : '' }}>Aktif</option>
+                <option value="Tidak Aktif" {{ ($s == 'Tidak Aktif' || $s == 'T') ? 'selected' : '' }}>Tidak Aktif</option>
             </select>
         </div>
 
-        <div class="flex justify-end space-x-3 pt-4 border-t">
-            <a href="{{ route('teachers.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300">Batal</a>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">Update</button>
+        <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
+            <a href="{{ route('teachers.index') }}" class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">Batal</a>
+            <button type="submit"
+                class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">Perbarui
+                Catatan</button>
         </div>
     </form>
-</div>
 @endsection

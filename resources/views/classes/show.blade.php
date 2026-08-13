@@ -3,38 +3,46 @@
 @section('title', $title)
 
 @section('content')
-<div class="container mx-auto px-4 py-6 max-w-2xl">
-    <div class="bg-white p-6 rounded-lg shadow">
-        <div class="flex justify-between items-center mb-6 border-b pb-4">
-            <h1 class="text-2xl font-bold text-gray-800">Detail Kelas</h1>
-            <a href="{{ route('classes.index') }}" class="text-sm text-gray-600 hover:text-gray-900">&larr; Kembali ke Daftar</a>
+    <a href="#" class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">&larr; Buku
+        Induk</a>
+
+    <div class="mt-3 border border-[#E5E3DB] bg-white">
+        <div class="flex items-start justify-between border-b border-[#E5E3DB] bg-[#FCFBF8] px-8 py-6">
+            <div>
+                <p class="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#A16207]">Lembar Kelas</p>
+                <h1 class="font-display text-3xl font-semibold text-[#16213A]">XII AKL 1</h1>
+            </div>
+            <a href="#"
+                class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">Ubah</a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <span class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Nama Kelas</span>
-                <p class="text-lg font-bold text-gray-900 mt-1">{{ $class['name'] }}</p>
+        <dl class="divide-y divide-[#EFEDE6] text-sm">
+            <div class="flex justify-between px-8 py-4">
+                <dt class="uppercase tracking-[0.1em] text-xs text-slate-400">Nama Kelas</dt>
+                <dd class="font-medium text-[#16213A]">XII AKL 1</dd>
             </div>
-
-            <div>
-                <span class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Tingkat</span>
-                <p class="text-gray-800 mt-1">{{ $class['grade'] }}</p>
+            <div class="flex justify-between px-8 py-4">
+                <dt class="uppercase tracking-[0.1em] text-xs text-slate-400">Tingkat</dt>
+                <dd class="font-medium text-[#16213A]">XII</dd>
             </div>
-
-            <div>
-                <span class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Jurusan</span>
-                <p class="text-gray-800 mt-1">{{ $class['major'] }}</p>
+            <div class="flex justify-between px-8 py-4">
+                <dt class="uppercase tracking-[0.1em] text-xs text-slate-400">Jurusan</dt>
+                <dd class="font-medium text-[#16213A]">AKL</dd>
             </div>
-
-            <div>
-                <span class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Wali Kelas</span>
-                <p class="text-gray-800 mt-1">{{ $class['homeroom_teacher'] }}</p>
+            <div class="flex justify-between px-8 py-4">
+                <dt class="uppercase tracking-[0.1em] text-xs text-slate-400">Wali Kelas</dt>
+                <dd class="font-medium text-[#16213A]">Budi Santoso</dd>
             </div>
-        </div>
+        </dl>
 
-        <div class="flex justify-end space-x-3 pt-6 mt-6 border-t">
-            <a href="{{ route('classes.edit', $class['id']) }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Edit Kelas</a>
+        <div class="flex justify-end gap-4 border-t border-[#E5E3DB] px-8 py-5">
+            <a href="" class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">Kembali</a>
+            <form action="" method="POST" onsubmit="return confirm('Hapus data siswa ini dari buku induk?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                    class="border border-red-200 px-5 py-2.5 text-sm font-medium text-red-700 transition hover:bg-red-50">Hapus</button>
+            </form>
         </div>
     </div>
-</div>
 @endsection
