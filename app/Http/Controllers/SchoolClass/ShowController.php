@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\SchoolClass;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {
-    public function __invoke($id)
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(Request $request, string $id)
     {
-        $title = 'Sistem Sekolah - Detail Kelas';
-        $classes = [
+    $title = "Sistem Sekolah - Detail Kelas";
+    $classes = [
             [
                 'id' => 1,
                 'name' => 'XII AKL 1',
@@ -24,14 +28,11 @@ class ShowController extends Controller
                 'major' => 'TKJ',
                 'homeroom_teacher' => 'Siti Aminah'
             ]
-        ];
+    ];
 
-        $class = collect($classes)->firstWhere('id', (int) $id);
-
-        if (!$class) {
-            abort(404);
-        }
-
-        return view('classes.show', compact('title', 'class'));
+        return view('classes.show', [
+            'title' => $title,
+            'classes' => $classes,
+        ]);
     }
 }

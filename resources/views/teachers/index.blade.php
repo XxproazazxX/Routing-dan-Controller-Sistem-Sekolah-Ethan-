@@ -50,7 +50,7 @@
                         {{ $teacher['phone'] ?? $teacher['phone_number'] ?? '-' }}
                     </td>
 
-                    {{-- Handling status dengan aman --}}
+
                     <td class="px-5 py-4">
                         @if(($teacher['status'] ?? 'Aktif') === 'Aktif')
                             <span class="bg-emerald-100 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full inline-block">

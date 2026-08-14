@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @section('content')
-    {{-- Menampilkan Alert jika terdapat kesalahan validasi --}}
+    
     @if ($errors->any())
         <x-alert type="WARNING">
             Terdapat kesalahan ketika memperbarui data jurusan ke dalam sistem sekolah
@@ -11,7 +11,7 @@
     @endif
 
     <div class="mb-8 border-b border-[#E5E3DB] pb-5">
-        {{-- Link kembali ke daftar jurusan --}}
+   
         <a href="{{ route('majors.index') }}" class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">&larr; Buku
             Induk</a>
         <h1 class="font-display mt-2 text-3xl font-semibold text-[#16213A]">Ubah Data Jurusan</h1>
@@ -23,7 +23,7 @@
         @csrf
         @method('PUT')
 
-        {{-- KODE JURUSAN --}}
+   
         <div>
             <label for="code"
                 class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Kode Jurusan</label>
@@ -34,7 +34,7 @@
             @enderror
         </div>
 
-        {{-- NAMA JURUSAN --}}
+    
         <div>
             <label for="name"
                 class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Nama Jurusan</label>
@@ -45,7 +45,7 @@
             @enderror
         </div>
 
-        {{-- DESKRIPSI --}}
+       
         <div>
             <label for="description"
                 class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Deskripsi</label>
@@ -56,7 +56,7 @@
             @enderror
         </div>
 
-        {{-- TOMBOL AKSI --}}
+      
         <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
             <a href="{{ route('majors.index') }}" class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">Batal</a>
             <button type="submit"
