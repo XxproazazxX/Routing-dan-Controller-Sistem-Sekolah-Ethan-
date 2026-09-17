@@ -1,18 +1,29 @@
- <header class="bg-[#16213A] text-white">
-        <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-            <a href="" class="flex items-center gap-3">
-                <span>
-                    <span class="font-display block text-lg font-semibold leading-none">Sistem Sekolah</span>
-                    <span class="text-[11px] uppercase tracking-[0.2em] text-white/50">Buku Induk Siswa</span>
-                </span>
+<header class="bg-[#16213A] text-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <div>
+            <a href="{{ route('students.index') }}" class="font-display text-lg font-semibold tracking-wide text-white">
+                Sistem Sekolah
             </a>
-            <nav class="hidden gap-8 text-sm md:flex">
-             <!-- Contoh pada file header.blade.php -->
-            <a href="{{ route('students.index') }}" class="...">Siswa</a>
-            <a href="{{ route('teachers.index') }}" class="...">Guru</a>
-            <a href="{{ route('classes.index') }}" class="...">Kelas</a>
-            <a href="{{ route('majors.index') }}" class="...">Jurusan</a>
-            </nav>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-slate-400">Buku Induk Siswa</p>
         </div>
-        <div class="h-0.5 bg-[#A16207]"></div>
-    </header>
+
+        <nav class="flex items-center gap-8 text-xs uppercase tracking-[0.15em]">
+            <a href="{{ route('students.index') }}" 
+               class="transition hover:text-amber-400 {{ request()->routeIs('students.*') ? 'text-amber-400 font-semibold' : 'text-slate-300' }}">
+                Siswa
+            </a>
+            <a href="{{ route('teachers.index') }}" 
+               class="transition hover:text-amber-400 {{ request()->routeIs('teachers.*') ? 'text-amber-400 font-semibold' : 'text-slate-300' }}">
+                Guru
+            </a>
+            <a href="{{ route('classes.index') }}" 
+               class="transition hover:text-amber-400 {{ request()->routeIs('classes.*') ? 'text-amber-400 font-semibold' : 'text-slate-300' }}">
+                Kelas
+            </a>
+            <a href="{{ route('majors.index') }}" 
+               class="transition hover:text-amber-400 {{ request()->routeIs('majors.*') ? 'text-amber-400 font-semibold' : 'text-slate-300' }}">
+                Jurusan
+            </a>
+        </nav>
+    </div>
+</header>

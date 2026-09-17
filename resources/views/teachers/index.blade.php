@@ -51,17 +51,9 @@
                     </td>
 
 
-                    <td class="px-5 py-4">
-                        @if(($teacher['status'] ?? 'Aktif') === 'Aktif')
-                            <span class="bg-emerald-100 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full inline-block">
-                                Aktif
-                            </span>
-                        @else
-                            <span class="bg-rose-100 text-rose-600 text-xs font-bold px-3 py-1 rounded-full inline-block">
-                                {{ $teacher['status'] ?? 'Tidak Aktif' }}
-                            </span>
-                        @endif
-                    </td>                     
+                   <td class="px-5 py-4">
+                       <x-status-badge :status="$teacher['status']" />
+                    </td>                
                     
                     <td class="px-5 py-4">
                         <div class="flex justify-end gap-4 text-xs font-medium">
