@@ -45,8 +45,19 @@ class StudentController extends Controller
     }
 
     public function store(Request $request)
-    {
-        return "Melakukan penambahan data siswa";
+    {  
+        //validasi
+       $request->validate([
+            'nis' => 'required|String|Size:4|Unique:students,nis',
+            'name' => 'required|String',
+            'class' => 'required',
+            'major' => 'required'
+        ]);
+
+        // Simpan data siswa ke database
+        // Student::create($request->all());
+
+        return redirect()->route('students.index')->with('success', 'Data siswa berhasil ditambahkan.');
     }
 
     public function show($id)
