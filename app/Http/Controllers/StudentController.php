@@ -71,6 +71,11 @@ class StudentController extends Controller
 
     public function destroy(Student $student)
     {
+        // 1. Hapus data siswa dari database
+    $student->delete();
+
+    // 2. Redirect kembali ke halaman daftar siswa (index)
+    return redirect()->route('students.index');
         return "Menghapus data siswa";
     }
 }
